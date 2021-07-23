@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
 import { Product, Stock } from '../types';
@@ -23,28 +23,86 @@ const CartContext = createContext<CartContextData>({} as CartContextData);
 
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const [cart, setCart] = useState<Product[]>(() => {
-    // const storagedCart = Buscar dados do localStorage
+    const storagedCart = localStorage.getItem('@RocketShoes:cart');
 
-    // if (storagedCart) {
-    //   return JSON.parse(storagedCart);
-    // }
+    if (storagedCart) {
+      // através do JSON.parse estamos retornando no formato de array de products
+      return JSON.parse(storagedCart);
+    }
 
     return [];
   });
 
+  const prevCartRef = useRef<Product[]>();
+
+  /*
+    Para o useEffect rodar toda vez que o CartProvider renderizar novamente, não 
+    é passado nenhum valor no array de dependencies, ou seja, deixaremos ele vazio
+   */
+  useEffect(() => {
+    prevCartRef.current = cart;
+  })
+
+  const cartPreviousValue = prevCartRef.current ?? cart;
+
+  useEffect(() => {
+    if (cartPreviousValue !== cart) {
+      localStorage.setItem('@RocketShoes:cart', JSON.stringify(cart));
+    }
+  }, [cart, cartPreviousValue]);
+
   const addProduct = async (productId: number) => {
     try {
-      // TODO
+      const updatedCart = [...cart];
+      const productExists = updatedCart.find(product => product.id === productId);
+
+      const stock = await api.get(`/stock/${productId}`);
+
+      const stockAmount = stock.data.amount;
+      const currentAmount = productExists ? productExists.amount : 0;
+      const amount = currentAmount + 1;
+
+      if (amount > stockAmount) {
+        toast.error('Quantidade solicitada fora de estoque');
+        return;
+      }
+
+      if (productExists) {
+        productExists.amount = amount;
+      } else {
+        const product = await api.get(`/products/${productId}`);
+
+        const newProduct = {
+          ...product.data,
+          amount: 1
+        }
+        updatedCart.push(newProduct);
+      }
+
+      setCart(updatedCart);
     } catch {
-      // TODO
+      toast.error('Erro na adição do produto');
     }
   };
 
   const removeProduct = (productId: number) => {
     try {
-      // TODO
+      //Imutabilidade - se caso não tivesse atribuído diretamente o cart, através
+      //da imutabilidade, o valor do cart também seria alterado, comprometendo toda a funcionalidade desenvolvida
+      const updatedCart = [...cart];
+      const productIndex = updatedCart.findIndex(product => product.id === productId);
+
+      if (productIndex >= 0) {
+        //com a utilização do splice, nós estaremos alterando o valor do updatedCart...adicionando ou removendo itens
+        //por isso, optamos pela utilização da imutabilidade presente no react
+        //e também do uso do findIndex, o uso do findIndex, caso não encontre nada na verificação, retorna -1
+        updatedCart.splice(productIndex, 1);
+        setCart(updatedCart);
+      } else {
+        throw Error();
+      }
     } catch {
-      // TODO
+      toast.error('Erro na remoção do produto');
     }
   };
 
@@ -53,9 +111,31 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     amount,
   }: UpdateProductAmount) => {
     try {
-      // TODO
+      if (amount <= 0) {
+        return;
+      }
+
+      const stock = await api.get(`/stock/${productId}`);
+
+      const stockAmount = stock.data.amount;
+
+      if (amount > stockAmount) {
+        toast.error('Quantidade solicitada fora de estoque');
+        return;
+      }
+
+      const updatedCart = [...cart];
+      const productExists = updatedCart.find(product => product.id === productId);
+
+      if (productExists) {
+        productExists.amount = amount;
+        //perpetuando o updatedCart no carrinho
+        setCart(updatedCart);
+      } else {
+        throw Error();
+      }
     } catch {
-      // TODO
+      toast.error('Erro na alteração de quantidade do produto');
     }
   };
 
