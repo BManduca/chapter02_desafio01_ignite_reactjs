@@ -11,13 +11,13 @@
 ## Súmario
 
 
-* [❌ Desafio ✅](#❌-Desafio-✅) 
-* [📲 Template da aplicação 📌](#📲-Template-da-aplicação-📌)
-* [🖥️ Tecnologias presentes no desafio 📝](#🖥️-Tecnologias-presentes-no-desafio-📝)
-* [⏱️ Preparando o desafio 🔝](#⏱️-Preparando-o-desafio-🔝)
-* [✅ ❌ Especificação dos testes 🚦](#✅-❌-Especificação-dos-testes-🚦)
-* [Resultado 🏅](#Resultado-🏅)
-* [Executando a aplicação 🚀](#Executando-a-aplicação-🚀)
+* [Desafio](#❌-Desafio-✅) 
+* [Template da aplicação](#📲-Template-da-aplicação-📌)
+* [Tecnologias presentes no desafio](#🖥️-Tecnologias-presentes-no-desafio-📝)
+* [Preparando o desafio](#⏱️-Preparando-o-desafio-🔝)
+* [Especificação dos testes](#✅-❌-Especificação-dos-testes-🚦)
+* [Resultado](#Resultado-🏅)
+* [Executando a aplicação](#Executando-a-aplicação-🚀)
 
 
 
