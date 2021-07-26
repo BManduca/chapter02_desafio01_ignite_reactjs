@@ -1,4 +1,4 @@
-<img alt="RocketShoes" title="RocketShoes" src="src/assets/images/Rocketshoes.svg">
+<img alt="RocketShoes" title="RocketShoes" src="src/assets/images/Rocketshoes.svg" align="center">
 
 <br />
 <br />
