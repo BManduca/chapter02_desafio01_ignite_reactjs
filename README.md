@@ -170,13 +170,21 @@ Será liberado acesso a duas páginas, um componente e um hook para implementar 
 
 ## Resultado 🏅
 
+- Tela inicial de compras
+
 <img src="src/assets/images/tela01.png" />
 
+
+
 <br />
+
+- Tela de seleção e verificação de valores
 
 <img src="src/assets/images/tela02.png" />
 
 <br />
+
+- Realizando inserção e exclusão de itens
 
 <img src="src/assets/images/tela03.png" />
 
