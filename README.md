@@ -170,7 +170,15 @@ Será liberado acesso a duas páginas, um componente e um hook para implementar 
 
 ## Resultado 🏅
 
-<video src="./src/assets/Gravação_de_tela.mov" />
+<img src="src/assets/images/tela01.png" />
+
+<br />
+
+<img src="src/assets/images/tela02.png" />
+
+<br />
+
+<img src="src/assets/images/tela03.png" />
 
 <br />
 
