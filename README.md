@@ -170,7 +170,7 @@ Será liberado acesso a duas páginas, um componente e um hook para implementar 
 
 ## Resultado 🏅
 
-<video src="./src/assets/RocketShoes.mp4" />
+<video src="./src/assets/Gravação_de_tela.mov" />
 
 <br />
 
