@@ -170,7 +170,7 @@ Será liberado acesso a duas páginas, um componente e um hook para implementar 
 
 ## Resultado 🏅
 
-<video src="/Users/brunnomanduca/Documents/repositórios/Rocketseat/Ignite/rocketseat_ignite_reactjs/desafios/chapter02_desafio_criando_um_hook_carrinho_compras/src/assets/RocketShoes.mp4"></video>
+<video src="./src/assets/RocketShoes.mp4" />
 
 <br />
 
